@@ -1,6 +1,7 @@
 package com.auca.imboniikimina.service;
 
 import com.auca.imboniikimina.model.Loan;
+import com.auca.imboniikimina.model.LoanStatus;
 import com.auca.imboniikimina.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class LoanService {
 
     public Optional<Loan> getLoanById(UUID id) {
         return loanRepository.findById(id);
+    }
+
+        public List<Loan> getLoansByStatus(LoanStatus status) {
+        return loanRepository.findByStatusOrderByRequestDateAsc(status);
     }
 
     public String updateLoan(UUID id, Loan newData) {

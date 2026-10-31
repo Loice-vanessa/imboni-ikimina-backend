@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.auca.imboniikimina.model.LoanStatus;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,5 +57,10 @@ public class LoanController {
         } else {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
+    }
+
+        @GetMapping("/by-status")
+    public ResponseEntity<List<Loan>> getByStatus(@RequestParam LoanStatus status) {
+        return new ResponseEntity<>(loanService.getLoansByStatus(status), HttpStatus.OK);
     }
 }
