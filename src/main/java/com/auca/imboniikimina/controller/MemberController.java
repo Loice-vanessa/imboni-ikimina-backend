@@ -21,7 +21,10 @@ public class MemberController {
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Member member) {
         String message = memberService.saveMember(member);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        if (message.equals("Member saved successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/all")
@@ -44,8 +47,10 @@ public class MemberController {
         String message = memberService.updateMember(id, member);
         if (message.equals("Member updated successfully")) {
             return new ResponseEntity<>(message, HttpStatus.OK);
-        } else {
+        } else if (message.equals("The member with that id does not exist")) {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
     }
 
