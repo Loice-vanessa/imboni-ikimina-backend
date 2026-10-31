@@ -42,4 +42,8 @@ public class SavingsGroupService {
             return "Savings group deleted successfully";
         }
 
+        public List<SavingsGroups> getFreeSavingsGroups() {
+        return savingsGroupRepository.findFreeSavingsGroups();
+    }
+
 }

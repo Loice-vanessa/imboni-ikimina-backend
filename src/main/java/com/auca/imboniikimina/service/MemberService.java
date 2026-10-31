@@ -15,9 +15,6 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     public String saveMember(Member member) {
-        if (memberRepository.findByMemberNumber(member.getMemberNumber()).isPresent()) {
-            return "A member with that member number already exists";
-        }
         memberRepository.save(member);
         return "Member saved successfully";
     }
@@ -34,10 +31,6 @@ public class MemberService {
         Optional<Member> existing = memberRepository.findById(id);
         if (existing.isEmpty()) {
             return "The member with that id does not exist";
-        }
-        Optional<Member> sameNumber = memberRepository.findByMemberNumber(newData.getMemberNumber());
-        if (sameNumber.isPresent() && !sameNumber.get().getId().equals(id)) {
-            return "A member with that member number already exists";
         }
         Member member = existing.get();
         member.setFirstName(newData.getFirstName());
@@ -56,7 +49,9 @@ public class MemberService {
         memberRepository.deleteById(id);
         return "Member deleted successfully";
     }
-        public List<Member> getMembersByLastName(String lastName) {
+
+    // B1
+    public List<Member> getMembersByLastName(String lastName) {
         return memberRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
 }

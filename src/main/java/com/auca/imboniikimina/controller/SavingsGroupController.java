@@ -54,4 +54,9 @@ public class SavingsGroupController {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND); 
         }
     }
+
+    @GetMapping("/free")
+    public ResponseEntity<List<SavingsGroups>> getFree() {
+        return new ResponseEntity<>(savingsGroupService.getFreeSavingsGroups(), HttpStatus.OK);
+    }
  }
