@@ -10,6 +10,7 @@ import com.auca.imboniikimina.model.LoanStatus;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/loans")
@@ -62,5 +63,12 @@ public class LoanController {
         @GetMapping("/by-status")
     public ResponseEntity<List<Loan>> getByStatus(@RequestParam LoanStatus status) {
         return new ResponseEntity<>(loanService.getLoansByStatus(status), HttpStatus.OK);
+    }
+
+        @GetMapping("/between")
+    public ResponseEntity<List<Loan>> getBetween(@RequestParam String start, @RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return new ResponseEntity<>(loanService.getLoansBetween(startDate, endDate), HttpStatus.OK);
     }
 }

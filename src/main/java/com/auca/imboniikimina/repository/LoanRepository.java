@@ -4,9 +4,11 @@ import com.auca.imboniikimina.model.Loan;
 import com.auca.imboniikimina.model.LoanStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public interface LoanRepository extends JpaRepository<Loan, UUID> {
 
     List<Loan> findByStatusOrderByRequestDateAsc(LoanStatus status);
+    List<Loan> findByRequestDateBetweenOrderByRequestDateAsc(LocalDate start, LocalDate end);
 }

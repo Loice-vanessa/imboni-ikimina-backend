@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
 
 @Service
 public class LoanService {
@@ -30,6 +31,10 @@ public class LoanService {
 
         public List<Loan> getLoansByStatus(LoanStatus status) {
         return loanRepository.findByStatusOrderByRequestDateAsc(status);
+    }
+
+        public List<Loan> getLoansBetween(LocalDate start, LocalDate end) {
+        return loanRepository.findByRequestDateBetweenOrderByRequestDateAsc(start, end);
     }
 
     public String updateLoan(UUID id, Loan newData) {
