@@ -46,4 +46,7 @@ public class LoanProductService {
         return "Loan product deleted successfully";
     }
     
+        public List<LoanProduct> getUnusedLoanProducts() {
+        return loanProductRepository.findUnusedLoanProducts();
+    }
 }
