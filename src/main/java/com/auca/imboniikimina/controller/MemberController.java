@@ -63,5 +63,10 @@ public class MemberController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
+
+      @GetMapping("/by-last-name")
+    public ResponseEntity<List<Member>> getByLastName(@RequestParam String lastName) {
+        return new ResponseEntity<>(memberService.getMembersByLastName(lastName), HttpStatus.OK);
+    }
     
 }
