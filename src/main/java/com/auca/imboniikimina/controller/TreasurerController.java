@@ -57,4 +57,9 @@ public class TreasurerController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/by-loan-product")
+    public ResponseEntity<List<Treasurer>> getByLoanProduct(@RequestParam String name) {
+        return new ResponseEntity<>(treasurerService.getTreasurersByLoanProduct(name), HttpStatus.OK);
+    }
 }

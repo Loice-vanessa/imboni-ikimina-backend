@@ -47,4 +47,7 @@ public class TreasurerService {
         treasurerRepository.deleteById(id);
         return "Treasurer deleted successfully";
     }
+        public List<Treasurer> getTreasurersByLoanProduct(String name) {
+        return treasurerRepository.findByLoanProductName(name);
+    }
 }
