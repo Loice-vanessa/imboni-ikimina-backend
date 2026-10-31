@@ -1,0 +1,8 @@
+package com.auca.imboniikimina.repository;
+
+import com.auca.imboniikimina.model.Loan;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.UUID;
+
+public interface LoanRepository extends JpaRepository<Loan, UUID> {
+}
