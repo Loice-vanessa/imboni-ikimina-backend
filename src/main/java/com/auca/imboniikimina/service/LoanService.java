@@ -72,4 +72,32 @@ public class LoanService {
     public List<Loan> getLoansBetween(LocalDate start, LocalDate end) {
         return loanRepository.findByRequestDateBetweenOrderByRequestDateAsc(start, end);
     }
+        // D2
+    public String updateLoanStatus(UUID id, LoanStatus newStatus) {
+        Optional<Loan> existing = loanRepository.findById(id);
+        if (existing.isEmpty()) {
+            return "The loan with that id does not exist";
+        }
+        Loan loan = existing.get();
+        LoanStatus current = loan.getStatus();
+
+        boolean allowed = false;
+        if (current == LoanStatus.REQUESTED) {
+            if (newStatus == LoanStatus.APPROVED || newStatus == LoanStatus.REJECTED) {
+                allowed = true;
+            }
+        } else if (current == LoanStatus.APPROVED) {
+            if (newStatus == LoanStatus.DISBURSED || newStatus == LoanStatus.REJECTED) {
+                allowed = true;
+            }
+        }
+        // DISBURSED and REJECTED are final: allowed stays false
+
+        if (!allowed) {
+            return "Cannot change status from " + current + " to " + newStatus;
+        }
+        loan.setStatus(newStatus);
+        loanRepository.save(loan);
+        return "Loan status updated successfully";
+    }
 }

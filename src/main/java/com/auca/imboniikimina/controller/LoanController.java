@@ -77,4 +77,16 @@ public class LoanController {
             return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
     }
+        // D2
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(@PathVariable UUID id, @RequestParam LoanStatus status) {
+        String message = loanService.updateLoanStatus(id, status);
+        if (message.equals("Loan status updated successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else if (message.equals("The loan with that id does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
