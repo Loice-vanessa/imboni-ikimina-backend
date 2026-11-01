@@ -3,6 +3,7 @@ package com.auca.imboniikimina.service;
 import com.auca.imboniikimina.model.Loan;
 import com.auca.imboniikimina.model.LoanStatus;
 import com.auca.imboniikimina.repository.LoanRepository;
+import com.auca.imboniikimina.repository.RepaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -15,6 +16,9 @@ public class LoanService {
 
     @Autowired
     private LoanRepository loanRepository;
+
+    @Autowired
+    private RepaymentRepository repaymentRepository;
 
     // A2 + D1
     public String saveLoan(Loan loan) {
@@ -55,9 +59,14 @@ public class LoanService {
         return "Loan updated successfully";
     }
 
+    // A2 + E3
     public String deleteLoan(UUID id) {
-        if (!loanRepository.existsById(id)) {
+        Optional<Loan> existing = loanRepository.findById(id);
+        if (existing.isEmpty()) {
             return "The loan with that id does not exist";
+        }
+        if (repaymentRepository.existsByLoan(existing.get())) {
+            return "That loan has repayments, delete them first";
         }
         loanRepository.deleteById(id);
         return "Loan deleted successfully";
@@ -72,7 +81,8 @@ public class LoanService {
     public List<Loan> getLoansBetween(LocalDate start, LocalDate end) {
         return loanRepository.findByRequestDateBetweenOrderByRequestDateAsc(start, end);
     }
-        // D2
+
+    // D2
     public String updateLoanStatus(UUID id, LoanStatus newStatus) {
         Optional<Loan> existing = loanRepository.findById(id);
         if (existing.isEmpty()) {
@@ -91,7 +101,6 @@ public class LoanService {
                 allowed = true;
             }
         }
-        // DISBURSED and REJECTED are final: allowed stays false
 
         if (!allowed) {
             return "Cannot change status from " + current + " to " + newStatus;

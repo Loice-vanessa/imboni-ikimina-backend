@@ -1,5 +1,6 @@
 package com.auca.imboniikimina.repository;
 
+import com.auca.imboniikimina.model.Loan;
 import com.auca.imboniikimina.model.Repayment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +14,6 @@ public interface RepaymentRepository extends JpaRepository<Repayment, UUID> {
     @Query("SELECT r FROM Repayment r WHERE r.loan.member.memberNumber = :memberNumber " +
            "ORDER BY r.paidDate DESC")
     List<Repayment> findByMemberNumber(@Param("memberNumber") String memberNumber);
+     // E3
+    boolean existsByLoan(Loan loan);
 }

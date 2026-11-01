@@ -45,4 +45,13 @@ public class RepaymentService {
     public List<Repayment> getRepaymentsOfMember(String memberNumber) {
         return repaymentRepository.findByMemberNumber(memberNumber);
     }
+
+    // E3
+    public String deleteRepayment(UUID id) {
+        if (!repaymentRepository.existsById(id)) {
+            return "The repayment with that id does not exist";
+        }
+        repaymentRepository.deleteById(id);
+        return "Repayment deleted successfully";
+    }
 }

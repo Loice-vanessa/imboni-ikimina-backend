@@ -39,4 +39,15 @@ public class RepaymentController {
     public ResponseEntity<List<Repayment>> getByMember(@PathVariable String memberNumber) {
         return new ResponseEntity<>(repaymentService.getRepaymentsOfMember(memberNumber), HttpStatus.OK);
     }
+
+    // E3
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable UUID id) {
+        String message = repaymentService.deleteRepayment(id);
+        if (message.equals("Repayment deleted successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
 }
