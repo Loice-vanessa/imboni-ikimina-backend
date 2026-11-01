@@ -23,16 +23,6 @@ LoanProduct, SavingsGroup, Treasurer, Member, Loan, Repayment, and the enum Loan
 4. The API runs at `http://localhost:8080`. Tables are created automatically (`ddl-auto=update`).
 5. Import `imboni-ikimina-midterm.postman_collection.json` into Postman. There is one request per requirement (A2, B1 … F2, BONUS-1, BONUS-2).
 
-erDiagram
-    SAVINGS_GROUP ||--o{ TREASURER : "savings_group_id (nullable)"
-    TREASURER ||--o{ TREASURER_LOAN_PRODUCT : "treasurer_id"
-    LOAN_PRODUCT ||--o{ TREASURER_LOAN_PRODUCT : "loan_product_id"
-    MEMBER ||--o{ LOAN : "member_id"
-    TREASURER ||--o{ LOAN : "treasurer_id"
-    LOAN ||--o{ REPAYMENT : "loan_id"
-
-    ## Entity Relationship Diagram
-
 ### Relationships
 
 | Parent | Relationship | Child | Foreign Key |
