@@ -33,4 +33,9 @@ public interface LoanRepository extends JpaRepository<Loan, UUID> {
                   @Param("date") LocalDate date,
                   @Param("rejected") LoanStatus rejected,
                   @Param("disbursed") LoanStatus disbursed);
+
+        // Bonus dashboard
+    long countByRequestDate(LocalDate requestDate);
+
+    long countByStatus(LoanStatus status);
 }
