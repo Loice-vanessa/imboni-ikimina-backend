@@ -98,4 +98,11 @@ public class LoanController {
     public ResponseEntity<List<Object[]>> getStatsByStatus() {
         return new ResponseEntity<>(loanService.getLoanStatsByStatus(), HttpStatus.OK);
     }
+        // F2
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDay(@RequestParam UUID treasurerId, @RequestParam String date) {
+        LocalDate day = LocalDate.parse(date);
+        String message = loanService.cancelDay(treasurerId, day);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }

@@ -4,6 +4,7 @@ import com.auca.imboniikimina.model.Loan;
 import com.auca.imboniikimina.model.LoanStatus;
 import com.auca.imboniikimina.repository.LoanRepository;
 import com.auca.imboniikimina.repository.RepaymentRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -113,5 +114,11 @@ public class LoanService {
         // F1
     public List<Object[]> getLoanStatsByStatus() {
         return loanRepository.countLoansByStatus();
+    }
+        // F2
+    @Transactional
+    public String cancelDay(UUID treasurerId, LocalDate date) {
+        int count = loanRepository.cancelDay(treasurerId, date, LoanStatus.REJECTED, LoanStatus.DISBURSED);
+        return count + " loans cancelled";
     }
 }
