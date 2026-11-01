@@ -1,0 +1,877 @@
+{
+  "info": {
+    "name": "imboni-ikimina-midterm",
+    "description": "ICYEZA Vanessa - 27901 - Imboni Ikimina mid-term. One request per requirement, named by its ID.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "A2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/{{loan1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "{{loan1Id}}"
+          ]
+        },
+        "description": "Get loan by id: 200 with the loan"
+      },
+      "response": []
+    },
+    {
+      "name": "A2 (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/11111111-1111-1111-1111-111111111111",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "11111111-1111-1111-1111-111111111111"
+          ]
+        },
+        "description": "404 The loan with that id does not exist"
+      },
+      "response": []
+    },
+    {
+      "name": "B1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/members/by-last-name?lastName=nyirahabimana",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "members",
+            "by-last-name"
+          ],
+          "query": [
+            {
+              "key": "lastName",
+              "value": "nyirahabimana"
+            }
+          ]
+        },
+        "description": "Aline then Claudine"
+      },
+      "response": []
+    },
+    {
+      "name": "B2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/by-status?status=REQUESTED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "by-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "REQUESTED"
+            }
+          ]
+        },
+        "description": "Earliest requestDate first"
+      },
+      "response": []
+    },
+    {
+      "name": "B3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/between?start=2026-10-01&end=2026-10-31",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "between"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01"
+            },
+            {
+              "key": "end",
+              "value": "2026-10-31"
+            }
+          ]
+        },
+        "description": "October loans, both dates inclusive"
+      },
+      "response": []
+    },
+    {
+      "name": "C1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/treasurers/by-loan-product?name=emergency",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "treasurers",
+            "by-loan-product"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "emergency"
+            }
+          ]
+        },
+        "description": "Jean and Samuel"
+      },
+      "response": []
+    },
+    {
+      "name": "C2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/savings-groups/free",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "savings-groups",
+            "free"
+          ]
+        },
+        "description": "Savings group 4"
+      },
+      "response": []
+    },
+    {
+      "name": "C3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loan-products/unused",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loan-products",
+            "unused"
+          ]
+        },
+        "description": "Business Loan"
+      },
+      "response": []
+    },
+    {
+      "name": "C4",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/members/of-treasurer/{{jeanId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "members",
+            "of-treasurer",
+            "{{jeanId}}"
+          ]
+        },
+        "description": "Aline, Claudine, Eric (Aline once)"
+      },
+      "response": []
+    },
+    {
+      "name": "C4 (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/members/of-treasurer/11111111-1111-1111-1111-111111111111",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "members",
+            "of-treasurer",
+            "11111111-1111-1111-1111-111111111111"
+          ]
+        },
+        "description": "404 The treasurer with that id does not exist"
+      },
+      "response": []
+    },
+    {
+      "name": "D1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/save",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "save"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"requestDate\": \"{{futureDate}}\",\n  \"status\": \"DISBURSED\",\n  \"amount\": 10000,\n  \"purpose\": \"Demo D1\",\n  \"member\": {\n    \"id\": \"{{patrickId}}\"\n  },\n  \"treasurer\": {\n    \"id\": \"{{jeanId}}\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "1st send: 201 and status forced to REQUESTED. 2nd send: 409 Treasurer already has a loan on that date"
+      },
+      "response": []
+    },
+    {
+      "name": "D1 (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/save",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "save"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"requestDate\": \"2026-10-20\",\n  \"amount\": 10000,\n  \"purpose\": \"Past date\",\n  \"member\": {\n    \"id\": \"{{patrickId}}\"\n  },\n  \"treasurer\": {\n    \"id\": \"{{jeanId}}\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "400 Loan date cannot be in the past"
+      },
+      "response": []
+    },
+    {
+      "name": "D1 (cleanup)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/delete/{{testLoanId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "delete",
+            "{{testLoanId}}"
+          ]
+        },
+        "description": "Deletes the test loan created by D1 (on futureDate), so D1 gives 201 again next time"
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Finds the loan created by D1 on futureDate",
+              "pm.sendRequest(pm.collectionVariables.get(\"baseUrl\") + \"/api/loans/all\", (err, res) => {",
+              "  if (err) { return; }",
+              "  const t = res.json().find(l => l.requestDate === pm.collectionVariables.get(\"futureDate\"));",
+              "  pm.collectionVariables.set(\"testLoanId\", t ? t.id : \"11111111-1111-1111-1111-111111111111\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "D2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/{{loan1Id}}/status?status=REQUESTED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "{{loan1Id}}",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "REQUESTED"
+            }
+          ]
+        },
+        "description": "400 Cannot change status from DISBURSED to REQUESTED"
+      },
+      "response": []
+    },
+    {
+      "name": "D2 (404)",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/11111111-1111-1111-1111-111111111111/status?status=APPROVED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "11111111-1111-1111-1111-111111111111",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "APPROVED"
+            }
+          ]
+        },
+        "description": "404 The loan with that id does not exist"
+      },
+      "response": []
+    },
+    {
+      "name": "D3",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/treasurers/{{graceId}}/loan-products/{{schoolFeesId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "treasurers",
+            "{{graceId}}",
+            "loan-products",
+            "{{schoolFeesId}}"
+          ]
+        },
+        "description": "409 The treasurer already has that loan product (200 the first time)"
+      },
+      "response": []
+    },
+    {
+      "name": "D3 (404)",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/treasurers/11111111-1111-1111-1111-111111111111/loan-products/{{schoolFeesId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "treasurers",
+            "11111111-1111-1111-1111-111111111111",
+            "loan-products",
+            "{{schoolFeesId}}"
+          ]
+        },
+        "description": "404 The treasurer with that id does not exist"
+      },
+      "response": []
+    },
+    {
+      "name": "D4",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/treasurers/{{samuelId}}/savings-group?groupNumber=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "treasurers",
+            "{{samuelId}}",
+            "savings-group"
+          ],
+          "query": [
+            {
+              "key": "groupNumber",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "409 That savings group is taken by another treasurer"
+      },
+      "response": []
+    },
+    {
+      "name": "D4 (move to 4)",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/treasurers/{{samuelId}}/savings-group?groupNumber=4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "treasurers",
+            "{{samuelId}}",
+            "savings-group"
+          ],
+          "query": [
+            {
+              "key": "groupNumber",
+              "value": "4"
+            }
+          ]
+        },
+        "description": "200 Savings group changed successfully. Then run C2: group 3 is free. Then run D4 (move back)"
+      },
+      "response": []
+    },
+    {
+      "name": "D4 (move back)",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/treasurers/{{samuelId}}/savings-group?groupNumber=3",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "treasurers",
+            "{{samuelId}}",
+            "savings-group"
+          ],
+          "query": [
+            {
+              "key": "groupNumber",
+              "value": "3"
+            }
+          ]
+        },
+        "description": "200, restores the seed data"
+      },
+      "response": []
+    },
+    {
+      "name": "E1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/repayments/save?loanId={{loan2Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "repayments",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "loanId",
+              "value": "{{loan2Id}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paymentChannel\": \"Cash at meeting\",\n  \"note\": \"First instalment\",\n  \"amount\": 10000\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "400 Repayments are only for DISBURSED loans (loan 2 is APPROVED)"
+      },
+      "response": []
+    },
+    {
+      "name": "E1 (201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/repayments/save?loanId={{loan1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "repayments",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "loanId",
+              "value": "{{loan1Id}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paymentChannel\": \"MoMo\",\n  \"note\": \"Demo instalment\",\n  \"amount\": 5000\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "201 Repayment saved successfully (adds a repayment, delete it with E3 (delete repayment))"
+      },
+      "response": []
+    },
+    {
+      "name": "E2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/repayments/member/IK-0023",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "repayments",
+            "member",
+            "IK-0023"
+          ]
+        },
+        "description": "Aline's repayments, newest paidDate first"
+      },
+      "response": []
+    },
+    {
+      "name": "E3",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/delete/{{loan1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "delete",
+            "{{loan1Id}}"
+          ]
+        },
+        "description": "409 That loan has repayments, delete them first"
+      },
+      "response": []
+    },
+    {
+      "name": "E3 (delete repayment)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/repayments/delete/{{repaymentId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "repayments",
+            "delete",
+            "{{repaymentId}}"
+          ]
+        },
+        "description": "200 Repayment deleted successfully (put a spare repayment id in the repaymentId variable)"
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Finds the spare repayment created by \"E1 (201)\"",
+              "pm.sendRequest(pm.collectionVariables.get(\"baseUrl\") + \"/api/repayments/all\", (err, res) => {",
+              "  if (err) { return; }",
+              "  const spare = res.json().filter(r => r.note === \"Demo instalment\");",
+              "  if (spare.length > 0) { pm.collectionVariables.set(\"repaymentId\", spare[spare.length - 1].id); }",
+              "  else { pm.collectionVariables.set(\"repaymentId\", \"11111111-1111-1111-1111-111111111111\"); }",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "E3 (404)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/repayments/delete/11111111-1111-1111-1111-111111111111",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "repayments",
+            "delete",
+            "11111111-1111-1111-1111-111111111111"
+          ]
+        },
+        "description": "404 The repayment with that id does not exist"
+      },
+      "response": []
+    },
+    {
+      "name": "F1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/stats/by-status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "stats",
+            "by-status"
+          ]
+        },
+        "description": "[[status, count], ...]"
+      },
+      "response": []
+    },
+    {
+      "name": "F2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/cancel-day?treasurerId={{jeanId}}&date=2026-10-20",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "cancel-day"
+          ],
+          "query": [
+            {
+              "key": "treasurerId",
+              "value": "{{jeanId}}"
+            },
+            {
+              "key": "date",
+              "value": "2026-10-20"
+            }
+          ]
+        },
+        "description": "N loans cancelled"
+      },
+      "response": []
+    },
+    {
+      "name": "BONUS-1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/dashboard/summary",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "dashboard",
+            "summary"
+          ]
+        },
+        "description": "Dashboard Map<String, Long>"
+      },
+      "response": []
+    },
+    {
+      "name": "BONUS-2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/loans/page?page=0&size=5&sort=requestDate,desc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "loans",
+            "page"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "5"
+            },
+            {
+              "key": "sort",
+              "value": "requestDate,desc"
+            }
+          ]
+        },
+        "description": "Page<Loan> with totalPages and totalElements"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "jeanId",
+      "value": "711c5e22-d4ce-43d7-95f4-7f846516693c"
+    },
+    {
+      "key": "graceId",
+      "value": "fdb3b735-cb08-4ff9-8ae2-9ec227c066c0"
+    },
+    {
+      "key": "samuelId",
+      "value": "74c7bd9e-dad3-494e-868a-cfee1d61caa1"
+    },
+    {
+      "key": "patrickId",
+      "value": "d29af3b8-6383-40a0-bbea-752601e9a9cd"
+    },
+    {
+      "key": "schoolFeesId",
+      "value": "ce7e0a50-bc75-48e6-9494-9c55b875a4c7"
+    },
+    {
+      "key": "loan1Id",
+      "value": ""
+    },
+    {
+      "key": "loan2Id",
+      "value": ""
+    },
+    {
+      "key": "repaymentId",
+      "value": ""
+    },
+    {
+      "key": "futureDate",
+      "value": "2026-12-28"
+    },
+    {
+      "key": "testLoanId",
+      "value": ""
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Finds loan 1 (2026-10-05, DISBURSED) and loan 2 (2026-10-12) automatically",
+          "const isId = v => /^[0-9a-f-]{36}$/.test(v || \"\");",
+          "if (!isId(pm.collectionVariables.get(\"loan1Id\")) || !isId(pm.collectionVariables.get(\"loan2Id\"))) {",
+          "  pm.sendRequest(pm.collectionVariables.get(\"baseUrl\") + \"/api/loans/all\", (err, res) => {",
+          "    if (err) { return; }",
+          "    const loans = res.json();",
+          "    const l1 = loans.find(l => l.requestDate === \"2026-10-05\" && l.status === \"DISBURSED\");",
+          "    const l2 = loans.find(l => l.requestDate === \"2026-10-12\");",
+          "    if (l1) { pm.collectionVariables.set(\"loan1Id\", l1.id); }",
+          "    if (l2) { pm.collectionVariables.set(\"loan2Id\", l2.id); }",
+          "  });",
+          "}"
+        ]
+      }
+    }
+  ]
+}
