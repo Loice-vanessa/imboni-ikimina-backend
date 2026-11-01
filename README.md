@@ -23,6 +23,59 @@ LoanProduct, SavingsGroup, Treasurer, Member, Loan, Repayment, and the enum Loan
 4. The API runs at `http://localhost:8080`. Tables are created automatically (`ddl-auto=update`).
 5. Import `imboni-ikimina-midterm.postman_collection.json` into Postman. There is one request per requirement (A2, B1 … F2, BONUS-1, BONUS-2).
 
+erDiagram
+    SAVINGS_GROUP ||--o{ TREASURER : "savings_group_id (nullable)"
+    TREASURER ||--o{ TREASURER_LOAN_PRODUCT : "treasurer_id"
+    LOAN_PRODUCT ||--o{ TREASURER_LOAN_PRODUCT : "loan_product_id"
+    MEMBER ||--o{ LOAN : "member_id"
+    TREASURER ||--o{ LOAN : "treasurer_id"
+    LOAN ||--o{ REPAYMENT : "loan_id"
+
+    LOAN_PRODUCT {
+        UUID id PK
+        String name
+    }
+    SAVINGS_GROUP {
+        UUID id PK
+        int groupNumber
+        String name
+    }
+    TREASURER {
+        UUID id PK
+        String firstName
+        String lastName
+        String phone
+        UUID savings_group_id FK
+    }
+    TREASURER_LOAN_PRODUCT {
+        UUID treasurer_id FK
+        UUID loan_product_id FK
+    }
+    MEMBER {
+        UUID id PK
+        String firstName
+        String lastName
+        String memberNumber UK
+        String phone
+        String village
+    }
+    LOAN {
+        UUID id PK
+        LocalDate requestDate
+        LoanStatus status "REQUESTED, APPROVED, DISBURSED, REJECTED"
+        double amount
+        String purpose
+        UUID member_id FK
+        UUID treasurer_id FK
+    }
+    REPAYMENT {
+        UUID id PK
+        String paymentChannel
+        String note
+        int amount
+        LocalDate paidDate
+        UUID loan_id FK
+    } How can I put this in my read me and it come as atabble of the relationship
 ## Endpoints
 | ID | Method | Endpoint |
 |---|---|---|
