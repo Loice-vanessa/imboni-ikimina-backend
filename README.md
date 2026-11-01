@@ -21,7 +21,7 @@ LoanProduct, SavingsGroup, Treasurer, Member, Loan, Repayment, and the enum Loan
    - Windows: `.\mvnw.cmd spring-boot:run`
    - Linux/Mac: `./mvnw spring-boot:run`
 4. The API runs at `http://localhost:8080`. Tables are created automatically (`ddl-auto=update`).
-5. Import `imboni-ikimina-midterm.postman_collection.json` into Postman. There is one request per requirement (A2, B1 … F2, BONUS-1, BONUS-2).
+5. adede `imboni-ikimina-midterm.postman_collection.json` my postman There is one request per requirement (A2, B1 … F2, BONUS-1, BONUS-2).
 
 ### Relationships
 
