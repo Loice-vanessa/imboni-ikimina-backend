@@ -31,51 +31,88 @@ erDiagram
     TREASURER ||--o{ LOAN : "treasurer_id"
     LOAN ||--o{ REPAYMENT : "loan_id"
 
-    LOAN_PRODUCT {
-        UUID id PK
-        String name
-    }
-    SAVINGS_GROUP {
-        UUID id PK
-        int groupNumber
-        String name
-    }
-    TREASURER {
-        UUID id PK
-        String firstName
-        String lastName
-        String phone
-        UUID savings_group_id FK
-    }
-    TREASURER_LOAN_PRODUCT {
-        UUID treasurer_id FK
-        UUID loan_product_id FK
-    }
-    MEMBER {
-        UUID id PK
-        String firstName
-        String lastName
-        String memberNumber UK
-        String phone
-        String village
-    }
-    LOAN {
-        UUID id PK
-        LocalDate requestDate
-        LoanStatus status "REQUESTED, APPROVED, DISBURSED, REJECTED"
-        double amount
-        String purpose
-        UUID member_id FK
-        UUID treasurer_id FK
-    }
-    REPAYMENT {
-        UUID id PK
-        String paymentChannel
-        String note
-        int amount
-        LocalDate paidDate
-        UUID loan_id FK
-    } How can I put this in my read me and it come as atabble of the relationship
+    ## Entity Relationship Diagram
+
+### Relationships
+
+| Parent | Relationship | Child | Foreign Key |
+|---|---|---|---|
+| SAVINGS_GROUP | one-to-many | TREASURER | `savings_group_id` (nullable) |
+| TREASURER | one-to-many | TREASURER_LOAN_PRODUCT | `treasurer_id` |
+| LOAN_PRODUCT | one-to-many | TREASURER_LOAN_PRODUCT | `loan_product_id` |
+| MEMBER | one-to-many | LOAN | `member_id` |
+| TREASURER | one-to-many | LOAN | `treasurer_id` |
+| LOAN | one-to-many | REPAYMENT | `loan_id` |
+
+### Entities
+
+**LOAN_PRODUCT**
+
+| Column | Type | Key |
+|---|---|---|
+| id | UUID | PK |
+| name | String | |
+
+**SAVINGS_GROUP**
+
+| Column | Type | Key |
+|---|---|---|
+| id | UUID | PK |
+| groupNumber | int | |
+| name | String | |
+
+**TREASURER**
+
+| Column | Type | Key |
+|---|---|---|
+| id | UUID | PK |
+| firstName | String | |
+| lastName | String | |
+| phone | String | |
+| savings_group_id | UUID | FK (nullable) |
+
+**TREASURER_LOAN_PRODUCT** (join table)
+
+| Column | Type | Key |
+|---|---|---|
+| treasurer_id | UUID | FK |
+| loan_product_id | UUID | FK |
+
+**MEMBER**
+
+| Column | Type | Key |
+|---|---|---|
+| id | UUID | PK |
+| firstName | String | |
+| lastName | String | |
+| memberNumber | String | UK |
+| phone | String | |
+| village | String | |
+
+**LOAN**
+
+| Column | Type | Key |
+|---|---|---|
+| id | UUID | PK |
+| requestDate | LocalDate | |
+| status | LoanStatus | REQUESTED, APPROVED, DISBURSED, REJECTED |
+| amount | double | |
+| purpose | String | |
+| member_id | UUID | FK |
+| treasurer_id | UUID | FK |
+
+**REPAYMENT**
+
+| Column | Type | Key |
+|---|---|---|
+| id | UUID | PK |
+| paymentChannel | String | |
+| note | String | |
+| amount | int | |
+| paidDate | LocalDate | |
+| loan_id | UUID | FK |
+
+Note: TREASURER and LOAN_PRODUCT have a many-to-many relationship through the TREASURER_LOAN_PRODUCT join table.
 ## Endpoints
 | ID | Method | Endpoint |
 |---|---|---|
