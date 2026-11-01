@@ -19,12 +19,6 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody Loan loan) {
-        String message = loanService.saveLoan(loan);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<Loan>> getAll() {
         return new ResponseEntity<>(loanService.getAllLoans(), HttpStatus.OK);
@@ -70,5 +64,17 @@ public class LoanController {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
         return new ResponseEntity<>(loanService.getLoansBetween(startDate, endDate), HttpStatus.OK);
+    }
+        // A2 + D1
+    @PostMapping("/save")
+    public ResponseEntity<String> save(@RequestBody Loan loan) {
+        String message = loanService.saveLoan(loan);
+        if (message.equals("Loan saved successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        } else if (message.equals("Loan date cannot be in the past")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
     }
 }

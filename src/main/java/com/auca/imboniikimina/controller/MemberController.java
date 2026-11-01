@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.auca.imboniikimina.model.Treasurer;
+import com.auca.imboniikimina.service.TreasurerService;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,6 +19,9 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+       @Autowired
+    private TreasurerService treasurerService;
 
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Member member) {
@@ -68,5 +73,14 @@ public class MemberController {
     public ResponseEntity<List<Member>> getByLastName(@RequestParam String lastName) {
         return new ResponseEntity<>(memberService.getMembersByLastName(lastName), HttpStatus.OK);
     }
-    
+
+    @GetMapping("/of-treasurer/{treasurerId}")
+    public ResponseEntity<?> getMembersOfTreasurer(@PathVariable UUID treasurerId) {
+        Optional<Treasurer> treasurer = treasurerService.getTreasurerById(treasurerId);
+        if (treasurer.isEmpty()) {
+            return new ResponseEntity<>("The treasurer with that id does not exist", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(memberService.getMembersOfTreasurer(treasurerId), HttpStatus.OK);
+        }
+    }
 }

@@ -5,10 +5,10 @@ import com.auca.imboniikimina.model.LoanStatus;
 import com.auca.imboniikimina.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.time.LocalDate;
 
 @Service
 public class LoanService {
@@ -16,7 +16,17 @@ public class LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
+    // A2 + D1
     public String saveLoan(Loan loan) {
+        if (loan.getRequestDate().isBefore(LocalDate.now())) {
+            return "Loan date cannot be in the past";
+        }
+        boolean busy = loanRepository.existsByTreasurerIdAndRequestDateAndStatusNot(
+                loan.getTreasurer().getId(), loan.getRequestDate(), LoanStatus.REJECTED);
+        if (busy) {
+            return "Treasurer already has a loan on that date";
+        }
+        loan.setStatus(LoanStatus.REQUESTED);
         loanRepository.save(loan);
         return "Loan saved successfully";
     }
@@ -27,14 +37,6 @@ public class LoanService {
 
     public Optional<Loan> getLoanById(UUID id) {
         return loanRepository.findById(id);
-    }
-
-        public List<Loan> getLoansByStatus(LoanStatus status) {
-        return loanRepository.findByStatusOrderByRequestDateAsc(status);
-    }
-
-        public List<Loan> getLoansBetween(LocalDate start, LocalDate end) {
-        return loanRepository.findByRequestDateBetweenOrderByRequestDateAsc(start, end);
     }
 
     public String updateLoan(UUID id, Loan newData) {
@@ -59,5 +61,15 @@ public class LoanService {
         }
         loanRepository.deleteById(id);
         return "Loan deleted successfully";
+    }
+
+    // B2
+    public List<Loan> getLoansByStatus(LoanStatus status) {
+        return loanRepository.findByStatusOrderByRequestDateAsc(status);
+    }
+
+    // B3
+    public List<Loan> getLoansBetween(LocalDate start, LocalDate end) {
+        return loanRepository.findByRequestDateBetweenOrderByRequestDateAsc(start, end);
     }
 }
