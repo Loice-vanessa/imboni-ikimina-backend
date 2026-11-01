@@ -40,4 +40,9 @@ public class RepaymentService {
     public List<Repayment> getAllRepayments() {
         return repaymentRepository.findAll();
     }
+
+    // E2
+    public List<Repayment> getRepaymentsOfMember(String memberNumber) {
+        return repaymentRepository.findByMemberNumber(memberNumber);
+    }
 }

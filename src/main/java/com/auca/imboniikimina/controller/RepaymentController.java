@@ -33,4 +33,10 @@ public class RepaymentController {
     public ResponseEntity<List<Repayment>> getAll() {
         return new ResponseEntity<>(repaymentService.getAllRepayments(), HttpStatus.OK);
     }
+
+    // E2
+    @GetMapping("/member/{memberNumber}")
+    public ResponseEntity<List<Repayment>> getByMember(@PathVariable String memberNumber) {
+        return new ResponseEntity<>(repaymentService.getRepaymentsOfMember(memberNumber), HttpStatus.OK);
+    }
 }
