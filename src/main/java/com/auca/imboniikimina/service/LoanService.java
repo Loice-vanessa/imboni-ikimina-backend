@@ -7,6 +7,8 @@ import com.auca.imboniikimina.repository.RepaymentRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -120,5 +122,9 @@ public class LoanService {
     public String cancelDay(UUID treasurerId, LocalDate date) {
         int count = loanRepository.cancelDay(treasurerId, date, LoanStatus.REJECTED, LoanStatus.DISBURSED);
         return count + " loans cancelled";
+    }
+        // Bonus: pagination
+    public Page<Loan> getLoansPage(Pageable pageable) {
+        return loanRepository.findAll(pageable);
     }
 }

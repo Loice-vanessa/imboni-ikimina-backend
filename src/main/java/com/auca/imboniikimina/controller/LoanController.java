@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import com.auca.imboniikimina.model.LoanStatus;
 import java.util.List;
 import java.util.Optional;
@@ -104,5 +108,17 @@ public class LoanController {
         LocalDate day = LocalDate.parse(date);
         String message = loanService.cancelDay(treasurerId, day);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+        // Bonus: pagination
+    @GetMapping("/page")
+    public ResponseEntity<Page<Loan>> getPage(@RequestParam int page,
+                                              @RequestParam int size,
+                                              @RequestParam String sort) {
+        String[] parts = sort.split(",");          // "requestDate,desc" -> ["requestDate", "desc"]
+        String field = parts[0];                    // "requestDate"
+        Sort.Direction direction = Sort.Direction.fromString(parts[1]);   // DESC
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, field));
+        return new ResponseEntity<>(loanService.getLoansPage(pageable), HttpStatus.OK);
     }
 }
