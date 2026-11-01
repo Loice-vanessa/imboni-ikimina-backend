@@ -92,4 +92,10 @@ public class LoanController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
     }
+
+        // F1
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> getStatsByStatus() {
+        return new ResponseEntity<>(loanService.getLoanStatsByStatus(), HttpStatus.OK);
+    }
 }

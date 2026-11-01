@@ -109,4 +109,9 @@ public class LoanService {
         loanRepository.save(loan);
         return "Loan status updated successfully";
     }
+
+        // F1
+    public List<Object[]> getLoanStatsByStatus() {
+        return loanRepository.countLoansByStatus();
+    }
 }
