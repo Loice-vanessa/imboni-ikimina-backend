@@ -28,6 +28,12 @@ public class TreasurerController {
         return new ResponseEntity<>(treasurerService.getAllTreasurers(), HttpStatus.OK);
     }
 
+    // C1
+    @GetMapping("/by-loan-product")
+    public ResponseEntity<List<Treasurer>> getByLoanProduct(@RequestParam String name) {
+        return new ResponseEntity<>(treasurerService.getTreasurersByLoanProduct(name), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Treasurer> treasurer = treasurerService.getTreasurerById(id);
@@ -58,8 +64,30 @@ public class TreasurerController {
         }
     }
 
-    @GetMapping("/by-loan-product")
-    public ResponseEntity<List<Treasurer>> getByLoanProduct(@RequestParam String name) {
-        return new ResponseEntity<>(treasurerService.getTreasurersByLoanProduct(name), HttpStatus.OK);
+    // D3
+    @PutMapping("/{treasurerId}/loan-products/{loanProductId}")
+    public ResponseEntity<String> addLoanProduct(@PathVariable UUID treasurerId, @PathVariable UUID loanProductId) {
+        String message = treasurerService.addLoanProduct(treasurerId, loanProductId);
+        if (message.equals("Loan product added to the treasurer")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else if (message.equals("The treasurer already has that loan product")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
     }
+
+        // D4
+    @PatchMapping("/{treasurerId}/savings-group")
+    public ResponseEntity<String> changeSavingsGroup(@PathVariable UUID treasurerId, @RequestParam int groupNumber) {
+        String message = treasurerService.changeSavingsGroup(treasurerId, groupNumber);
+        if (message.equals("Savings group changed successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else if (message.equals("That savings group is taken by another treasurer")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
+    
 }

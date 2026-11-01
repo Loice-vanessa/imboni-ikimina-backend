@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.UUID;
+import java.util.Optional;
+
 
 public interface SavingsGroupRepository extends JpaRepository<SavingsGroups, UUID> {
 
@@ -12,4 +14,6 @@ public interface SavingsGroupRepository extends JpaRepository<SavingsGroups, UUI
            "(SELECT t FROM Treasurer t WHERE t.savingsGroup = g) " +
            "ORDER BY g.groupNumber")
     List<SavingsGroups> findFreeSavingsGroups();
+    Optional<SavingsGroups> findByGroupNumber(int groupNumber);
+
 }
